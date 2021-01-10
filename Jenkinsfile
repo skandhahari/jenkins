@@ -1,10 +1,11 @@
 pipeline {
-	agent any
-	
+	//agent any
+	agent {docker {image 'maven:3.6.3'}}
 	stages {
 		stage('Build') {
 
 				steps{
+					sh echo "mvn --version is" 
 					echo "Build"
 					}
 				}
@@ -23,15 +24,22 @@ pipeline {
 				}
 		}
 	} 
+
 	post {
 		always {
-			echo 'Learning a lot more'
+					echo 'Always Learning a lot more'
 				}
 		success {
-			echo 'Succesful build'
+					echo 'Succesful build'
 				}
 		failure {
-			echo 'Failure build'
+					echo 'Failure build'
+				}
+		changed {
+					echo 'changed build'
+				}
+		unstable {
+					echo 'unstable build'
 				}
 
 	}
