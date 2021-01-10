@@ -22,5 +22,16 @@ pipeline {
 					echo "Integration Test"
 				}
 		}
+	} post{
+		always {
+			echo 'Learning a lot more'
+				}
+		success {
+			echo 'Succesful build'
+				}
+		failure {
+			echo 'Failure build'
+				}
+
 	}
 }
