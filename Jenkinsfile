@@ -22,7 +22,8 @@ pipeline {
 					echo "Integration Test"
 				}
 		}
-	} post{
+	} 
+	post {
 		always {
 			echo 'Learning a lot more'
 				}
