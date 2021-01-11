@@ -27,7 +27,7 @@ pipeline {
 					}
 				}
 
-		stage('Compile & Build') 
+		stage('Compile') 
 		{
 			steps{  
 				echo "Code compile is running"
@@ -48,6 +48,41 @@ pipeline {
 				steps{
 					echo "Integration Test is running"
 					sh "mvn failsafe:integration-test failsafe:verify"
+				}
+		}
+
+		stage('Package') {
+
+				steps{
+					echo "Binary is being created"
+					sh "mvn package -DskipTests"
+				}
+		}
+		
+		stage('Build Docker Image') {
+
+				steps{
+					echo "Docker Build"
+					//docker build -t 16022011/currency-exchange-devops:${env.BUILD_TAG}
+					script{
+						dockerImage=docker.build("16022011/currency-exchange-devops:${env.BUILD_TAG}")
+					}
+
+				}
+		}
+
+		stage('Push Docker Image') {
+
+				steps{
+					echo "Docker Push"
+					//docker build -t 16022011/currency-exchange-devops:${env.BUILD_TAG}
+					script{
+						docker.withRegistry('','dockerhub'){
+						dockerImage.push();
+						dockerImage.push('latest');
+					}
+					}
+
 				}
 		}
 	} 
