@@ -27,8 +27,9 @@ pipeline {
 					}
 				}
 
-		stage('Compile & Build') {
-			steps {  
+		stage('Compile & Build') 
+		{
+			steps{  
 				echo "Code compile is running"
 				mvn clean compile
 			}
