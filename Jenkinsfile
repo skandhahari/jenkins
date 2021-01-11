@@ -31,7 +31,7 @@ pipeline {
 		{
 			steps{  
 				echo "Code compile is running"
-				mvn clean compile
+				sh "mvn clean compile"
 			}
 		}
 
