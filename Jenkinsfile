@@ -77,7 +77,7 @@ pipeline {
 					echo "Docker Push"
 					//docker build -t 16022011/currency-exchange-devops:${env.BUILD_TAG}
 					script{
-						docker.withRegistry('','dockerhub'){
+						docker.withRegistry('','dockerhub'){ //ensure Docker ID is configued with user as "dockerhub" in credentials 
 						dockerImage.push();
 						dockerImage.push('latest');
 					}
