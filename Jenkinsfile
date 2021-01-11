@@ -11,8 +11,9 @@ pipeline {
 	}
 
 	stages {
-		stage('Checkout') {
-
+		
+		stage('Code Checkout') 
+			{
 				steps{
 						sh 'mvn --version' 
 						sh 'docker version' 
@@ -26,8 +27,8 @@ pipeline {
 					}
 				}
 
-		stage('Build') {
-			steps ('Compile') {
+		stage('Compile & Build') {
+			steps {  
 				echo "Code compile is running"
 				mvn clean compile
 			}
